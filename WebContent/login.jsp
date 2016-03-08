@@ -11,9 +11,11 @@
 </head>
 <body>
 
-success be happy :)
-
-<s:property  value="bestTutorialSite" />
+<s:form  action="login">
+ 	<s:textfield label="Login ID" key = "userId" />
+ 	<s:textfield label="Password" key = "password" />
+ 	<s:submit />
+ </s:form>
 
 </body>
 </html>
