@@ -7,6 +7,30 @@ public class TutorialAction
 	private String bestTutorialSite;
 	private String language = "";
 	
+	public String getTutorialMethod()
+	{
+		TutorialFinderService obj = new TutorialFinderService();
+		setBestTutorialSite ( obj.findTutorial(getLanguage()) );
+		System.out.println("getTutorialMethod executed");
+		return "success";
+	}
+	
+	public String addTutorialMethod()
+	{
+		TutorialFinderService obj = new TutorialFinderService();
+		setBestTutorialSite ( obj.findTutorial(getLanguage()) );
+		System.out.println("addTutorialMethod executed");
+		return "success";
+	}
+	
+	public String execute()
+	{
+		TutorialFinderService obj = new TutorialFinderService();
+		setBestTutorialSite ( obj.findTutorial(getLanguage()) );
+		System.out.println("hi");
+		return "success";
+	}
+	
 	public String getLanguage() {
 		return language;
 	}
@@ -23,10 +47,5 @@ public class TutorialAction
 		this.bestTutorialSite = bestTutorialSite;
 	}
 
-	public String execute()
-	{
-		TutorialFinderService obj = new TutorialFinderService();
-		setBestTutorialSite ( obj.findTutorial(getLanguage()) );
-		return "success";
-	}
+	
 }

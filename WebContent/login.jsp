@@ -11,9 +11,18 @@
 </head>
 <body>
 
+<!-- 
 <s:form  action="login">
- 	<s:textfield label="Login ID" key = "userId" />
- 	<s:textfield label="Password" key = "password" />
+ 	<s:textfield label="Login ID" key = "user.userId" />
+ 	<s:textfield label="Password" key = "user.password" />
+ 	<s:submit />
+ </s:form>
+ -->
+ 
+<!-- If you use ModelDriven interface  then --> 
+<s:form  action="login">
+ 	<s:textfield label="Login ID" key = "user.userId" />
+ 	<s:textfield label="Password" key = "user.password" />
  	<s:submit />
  </s:form>
 
