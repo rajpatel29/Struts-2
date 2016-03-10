@@ -1,6 +1,10 @@
 package action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -8,11 +12,23 @@ import com.opensymphony.xwork2.ModelDriven;
 import model.User;
 import service.LoginService;
 
-public class LoginAction extends ActionSupport implements ModelDriven<User>
+public class LoginAction  extends ActionSupport implements ModelDriven<User> , ServletRequestAware
 {
 	private User user = new User();
+	HttpServletRequest request;
 
-	  public User getUser() {
+	public void setServletRequest(HttpServletRequest request)
+	{
+		this.request = request;		
+	}
+	
+	 public HttpSession getSession(){
+	        return request.getSession();
+	  }
+
+	 
+	 
+	public User getUser() {
 		return user;
 	}
 
@@ -26,11 +42,9 @@ public class LoginAction extends ActionSupport implements ModelDriven<User>
 		  //It will automatically redirect to default page
 		  //see login.xml page check result tag which has "input" name that is default page
 		  
-		System.out.println("validate " + user.getUserId() + "  ==  " + user.getPassword() );
 		  if(StringUtils.isEmpty(user.getUserId()))
 		  {
 			  //User Id is blank
-			  System.out.println("Blank");
 			  addFieldError("user.userId", "User Id can not be blanck");
 		  }
 		  if(StringUtils.isEmpty(user.getPassword()))
@@ -47,6 +61,8 @@ public class LoginAction extends ActionSupport implements ModelDriven<User>
 		if(loginService.verify(user))
 		{
 			//Best Practice 1
+			HttpSession session = request.getSession();
+			session.setAttribute("authorized", "yes");
 			return SUCCESS;
 		}
 		else
@@ -61,6 +77,4 @@ public class LoginAction extends ActionSupport implements ModelDriven<User>
 	{
 		return user;
 	}
-	
-	
 }

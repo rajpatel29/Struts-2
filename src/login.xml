@@ -6,12 +6,41 @@
  <struts>
  	
 	<package name="login" namespace="/" extends="struts-default">
+ 	
+	<interceptors>
+	
+		<interceptor name="authenticate" class="action.AuthInterceptor" ></interceptor>
+	
+	</interceptors>
+ 	
+ 	
  		<action name="login" class = "action.LoginAction" >
- 			<result name="success">/index.jsp</result>
+ 			<result name="success" type="chain">authorizedonly</result>
  			<result name="login">/login.jsp</result>
  			<result name="input">/login.jsp</result>
  		</action>
+ 	
+ 	
+ 			<action name="authorizedonly">
+	
+	<interceptor-ref name="authenticate"></interceptor-ref>
+	
+		<result name="success" >/index.jsp</result>
+		<result name="failure" >/login.jsp</result>
+	
+	
+	
+	</action>
+ 	
+ 	
  	</package>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  	
  	<!-- Best Practice 3 -->
  	<!-- If there is no class to execute then you can write something like this -->
